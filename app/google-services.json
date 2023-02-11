@@ -1,0 +1,113 @@
+{
+  "project_info": {
+    "project_number": "442728235869",
+    "project_id": "chitchat-ce582",
+    "storage_bucket": "chitchat-ce582.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:442728235869:android:c3e01fde719f84e0cd9eb4",
+        "android_client_info": {
+          "package_name": "com.example.chitchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "442728235869-41k3at6b5e01cmc178qhrenkpdd2lh3i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARdxOWQhCKoLHnbtB7u7L3v7bEjpHzCUo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "442728235869-17oj9mqjgho3fm48rkub41f0dd1fvi2g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:442728235869:android:7bfc40383a7d8141cd9eb4",
+        "android_client_info": {
+          "package_name": "com.example.driveproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "442728235869-ge1elthvihtl4q40e5al190ohk5rbfdc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.driveproject",
+            "certificate_hash": "53a560589bf68c255638bc3be31289ed592dd4a2"
+          }
+        },
+        {
+          "client_id": "442728235869-41k3at6b5e01cmc178qhrenkpdd2lh3i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARdxOWQhCKoLHnbtB7u7L3v7bEjpHzCUo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "442728235869-17oj9mqjgho3fm48rkub41f0dd1fvi2g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:442728235869:android:2dafdf1d4c1269a9cd9eb4",
+        "android_client_info": {
+          "package_name": "com.iemkol.beez"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "442728235869-9205lqqf17cu67i2e7qg1lfle424o598.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iemkol.beez",
+            "certificate_hash": "53a560589bf68c255638bc3be31289ed592dd4a2"
+          }
+        },
+        {
+          "client_id": "442728235869-41k3at6b5e01cmc178qhrenkpdd2lh3i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARdxOWQhCKoLHnbtB7u7L3v7bEjpHzCUo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "442728235869-17oj9mqjgho3fm48rkub41f0dd1fvi2g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
