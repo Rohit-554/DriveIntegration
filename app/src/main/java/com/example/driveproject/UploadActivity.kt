@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -18,6 +17,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.api.client.extensions.android.http.AndroidHttp
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
 import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException
+import com.google.api.client.googleapis.json.GoogleJsonResponseException
 import com.google.api.client.http.FileContent
 import com.google.api.client.json.jackson2.JacksonFactory
 import com.google.api.services.drive.Drive
@@ -27,7 +27,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.OutputStream
+import java.util.*
 
 
 class UploadActivity : AppCompatActivity() {
@@ -38,9 +41,13 @@ class UploadActivity : AppCompatActivity() {
         setContentView(R.layout.activity_upload)
         var upload: Button = findViewById(R.id.gUpload)
         var signout:Button = findViewById(R.id.signout)
+        var download:Button = findViewById(R.id.download)
         mDrive = getDriveService()
         upload.setOnClickListener {
             uploadFileToGDrive()
+        }
+        download.setOnClickListener {
+            
         }
         signout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
@@ -106,8 +113,6 @@ class UploadActivity : AppCompatActivity() {
         }
     }
 
-
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_PHOTO_FOR_AVATAR && resultCode == Activity.RESULT_OK && data != null) {
@@ -127,8 +132,20 @@ class UploadActivity : AppCompatActivity() {
             file.writeBytes(bytes)
         }
         val gfile = com.google.api.services.drive.model.File()
+
+        //Target-1
+        /*this is for folder upload ...
+          gfile.name = "newfolder"
+          gfile.mimeType = "application/vnd.google-apps.folder"
+           */
+
+        //this is the process for the upload inside the folder
         gfile.name = file.name
-        val mimetype = "image/png"
+
+        //here "1yb75593oBph9uc6Tg0yBiqrVV31pkh4P" is the id of specific file eg.https://drive.google.com/drive/u/4/folders/1yb75593oBph9uc6Tg0yBiqrVV31pkh4P
+        //so we can create a file and return the id using the Target-1 Code (aisa hi naam de diya hai upar wala commented code hai)
+        gfile.setParents(Collections.singletonList("1yb75593oBph9uc6Tg0yBiqrVV31pkh4P"))
+        val mimetype = "image/jpeg"
         val fileContent = FileContent(mimetype, file)
 
         val progressbar = findViewById<ProgressBar>(R.id.progressbar)
@@ -140,7 +157,11 @@ class UploadActivity : AppCompatActivity() {
                         progressbar.visibility = View.VISIBLE
                         withContext(Dispatchers.IO) {
                             launch {
-                                getDriveService()?.Files()?.create(gfile, fileContent)?.execute()
+                                /*
+                                use this for folder upload
+                                getDriveService()?.Files()?.create(gfile)?.setFields("id")?.execute()
+                                 */
+                                getDriveService()?.Files()?.create(gfile,fileContent)?.setFields("id, parents")?.execute()
                             }
                         }
                     }
@@ -161,5 +182,18 @@ class UploadActivity : AppCompatActivity() {
         } catch (e: Exception) {
             Log.e("TAG", "Exception while launching coroutine", e)
         }
+
+
+        fun downloadFile(fileId:String):ByteArrayOutputStream{
+            val outputStream: OutputStream = ByteArrayOutputStream()
+            try {
+                getDriveService()?.files()?.export(fileId, "application/pdf")
+                    ?.executeMediaAndDownloadTo(outputStream);
+                return outputStream as ByteArrayOutputStream
+            } catch (e:GoogleJsonResponseException ) {
+                System.err.println("Unable to export file: " + e.getDetails());
+                throw e;
+            }
+        }
+        }
     }
-}

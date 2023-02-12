@@ -21,6 +21,13 @@
         android:layout_height="wrap_content"
         android:text="singout"
         />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="download"
+        />
     <ProgressBar
         android:id="@+id/progressbar"
         android:layout_width="wrap_content"
